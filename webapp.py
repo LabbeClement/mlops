@@ -1,5 +1,4 @@
 #Level 0 (on your local machine) 
-from streamlit import st
 from fastapi import FastAPI
 import joblib
 
