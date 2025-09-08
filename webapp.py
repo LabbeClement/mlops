@@ -8,7 +8,7 @@ app = FastAPI()
 async def root():
     return {"y_pred": 2}
 
-@app.post("/predict")
+@app.post("/pt")
 def predict(size: float = 0, bedrooms: int = 0, garden: int = 0):
     import joblib
     model = joblib.load("regression.joblib")
