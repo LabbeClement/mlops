@@ -15,7 +15,7 @@ def predict(size: float = 0, bedrooms: int = 0, garden: int = 0):
     prediction = model.predict([[size, bedrooms, garden]])
     return {"y_pred": prediction[0]}
 
-uvicorn.run(app, host="82.82.82.82", port=8023)
+uvicorn.run(app, host="82.82.82.82", port=8963)
 #Level 0.5 (on a remote machine)
 
 # 4. Launch your web service on the remote machine
