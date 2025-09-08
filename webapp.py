@@ -1,8 +1,13 @@
 #Level 0 (on your local machine) 
 from fastapi import FastAPI
-import joblib
+import uvicorn
 
 app = FastAPI()
+
+@app.get("/predict")
+async def root():
+    return {"y_pred": 2}
+
 @app.post("/predict")
 def predict(size: float = 0, bedrooms: int = 0, garden: int = 0):
     import joblib
@@ -10,6 +15,7 @@ def predict(size: float = 0, bedrooms: int = 0, garden: int = 0):
     prediction = model.predict([[size, bedrooms, garden]])
     return {"y_pred": prediction[0]}
 
+uvicorn.run(app, host="82.82.82.82", port=8023)
 #Level 0.5 (on a remote machine)
 
 # 4. Launch your web service on the remote machine
