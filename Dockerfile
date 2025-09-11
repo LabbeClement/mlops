@@ -6,4 +6,4 @@ COPY src/ ./src/
 
 EXPOSE 8963
 
-CMD ["fastapi", "run", "src/webapp.py"]
+CMD ["python", "src/webapp.py"]
