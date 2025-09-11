@@ -5,4 +5,6 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 COPY webapp.py ./app/
-CMD ["fastapi", "run", "./app/webapp.py", "--port", "8963"]
+
+EXPOSE 8963
+CMD ["fastapi", "run" , "app/webapp.py,"]
