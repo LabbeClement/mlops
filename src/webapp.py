@@ -1,8 +1,8 @@
 #Level 0 (on your local machine) 
 from fastapi import FastAPI
 import uvicorn
-app = FastAPI()
 
+app = FastAPI()
 @app.get("/predict")
 async def root():
     return {"y_pred": 2}
