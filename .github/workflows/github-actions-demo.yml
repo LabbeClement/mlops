@@ -7,3 +7,5 @@ jobs:
      - uses: actions/checkout@v4
      - run: docker build -t mlops .
      - run: docker run -d -p 8963:8963 mlops
+     - name: Start SSH session
+       uses: mxschmitt/action-tmate@v3
