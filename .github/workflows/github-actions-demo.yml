@@ -20,3 +20,23 @@ jobs:
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/mlops:latest
           ${{ secrets.DOCKER_USERNAME }}/mlops:${{ github.sha }}
+
+    - name: Deploy to Production VM
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        password: ${{ secrets.VM_PASSWORD }}
+        script: |
+          # Arrêter l'ancien container si il existe
+          docker stop mlops-prod || true
+          docker rm mlops-prod || true
+          
+          # Télécharger la nouvelle image
+          docker pull ${{ secrets.DOCKER_USERNAME }}/mlops:latest
+          
+          # Nettoyer les anciennes images
+          docker image prune -f
+          
+          # Lancer le nouveau container
+          docker run -d -p 8963:8963 --name mlops-prod --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/mlops:latest
