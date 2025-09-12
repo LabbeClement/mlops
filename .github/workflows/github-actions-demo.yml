@@ -37,6 +37,6 @@ jobs:
           
           # Nettoyer les anciennes images
           docker image prune -f
-          
+        
           # Lancer le nouveau container
           docker run -d -p 8963:8963 --name mlops-prod --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/mlops:latest
