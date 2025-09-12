@@ -21,8 +21,8 @@ jobs:
          context: .
          push: true
          tags: |
-           ${{ secrets.DOCKER_USERNAME }}/mlops:latest
-           ${{ secrets.DOCKER_USERNAME }}/mlops:${{ github.sha }}
+           ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_USERNAME  }}/mlops:latest
+           ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_USERNAME }}/mlops:${{ github.sha }}
          
      - name: Test run container
        run: docker run -d -p 8963:8963 ${{ secrets.DOCKER_USERNAME }}/mlops:latest
