@@ -14,15 +14,9 @@ jobs:
        with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-      
-     - name: Build and push
-       uses: docker/build-push-action@v5
-       with:
-         context: .
-         push: true
-         tags: |
-           ${{ secrets.DOCKER_USERNAME }}/mlops:latest
-           ${{ secrets.DOCKER_USERNAME }}/mlops:${{ github.sha }}
+        
+     - name: Build Docker image
+       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mlops:latest .
          
      - name: Test run container
        run: docker run -d -p 8963:8963 ${{ secrets.DOCKER_USERNAME }}/mlops:latest
